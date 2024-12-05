@@ -9,4 +9,7 @@ services:
       - .:/app
     environment:
       DJANGO_SETTINGS_MODULE: iotapp.settings
-    command: sh -c "python iotapp/manage.py livereload & python iotapp/manage.py runserver 0.0.0.0:8000"
+    command: >
+      sh -c "python iotapp/manage.py makemigrations && 
+             python iotapp/manage.py migrate && 
+             python iotapp/manage.py runserver 0.0.0.0:8000"
