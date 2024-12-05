@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Tipo de Dispositivo{% endblock title %}
+
+{% block content %}
+
+<div class="flex flex-col w-full h-full bg-[#1e2a35] text-white p-6">
+    <p class="text-2xl font-bold mb-6">Detalle del Tipo</p>
+
+    <div class="bg-[#2d3e50] p-6 rounded-lg shadow-md mb-8">
+        <p class="text-sm text-gray-400">Nombre del Tipo</p>
+        <p class="text-lg font-semibold">{{ object.descripcion }}</p>
+    </div>
+
+    <p class="text-xl font-bold mb-4">Dispositivos Asociados</p>
+    <div class="flex flex-col gap-4">
+        {% for dispositivo in dispositivos %}
+        <div class="bg-[#2d3e50] p-4 rounded-lg shadow-md flex justify-between items-center">
+            <!-- Información del Dispositivo -->
+            <div>
+                <p class="text-lg font-semibold">{{ dispositivo.nombre }}</p>
+                <p class="text-sm text-gray-400">MAC Address: {{ dispositivo.mac_adress }}</p>
+            </div>
+
+            <!-- Opciones -->
+            <div class="flex gap-2">
+                <a 
+                    href="{% url 'dispositivo:detalle' pk=dispositivo.id %}" 
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md px-3 py-1 transition">
+                    Ver
+                </a>
+                <a 
+                    href="{% url 'dispositivo:actualizar' pk=dispositivo.id %}" 
+                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium rounded-md px-3 py-1 transition">
+                    Editar
+                </a>
+                <a 
+                    href="{% url 'dispositivo:eliminar' pk=dispositivo.id %}" 
+                    class="bg-red-600 hover:bg-red-700 text-white font-medium rounded-md px-3 py-1 transition">
+                    Eliminar
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="bg-[#2d3e50] p-4 rounded-lg shadow-md text-center">
+            <p class="text-gray-400">No hay dispositivos asociados a este tipo.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock content %}

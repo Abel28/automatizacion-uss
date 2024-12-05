@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle Dispositivo{% endblock title %}
+
+{% block content %}
+
+<div class="flex flex-col items-center justify-center w-full bg-[#1e2a35] text-white p-6">
+    <!-- Título -->
+    <p class="text-2xl font-bold mb-6">Detalle del Dispositivo</p>
+
+    <!-- Contenedor de Detalles -->
+    <div class="bg-[#2d3e50] p-6 rounded-lg shadow-lg w-[30rem]">
+        <div class="flex flex-col space-y-4">
+            <!-- Campo: MAC Address -->
+            <div>
+                <p class="text-sm font-medium text-gray-400">MAC Address</p>
+                <p class="text-lg font-semibold">{{ dispositivo.mac_adress }}</p>
+            </div>
+
+            <!-- Campo: Nombre -->
+            <div>
+                <p class="text-sm font-medium text-gray-400">Nombre</p>
+                <p class="text-lg font-semibold">{{ dispositivo.nombre }}</p>
+            </div>
+
+            <!-- Campo: Estado -->
+            <div>
+                <p class="text-sm font-medium text-gray-400">Estado</p>
+                <p class="text-lg font-semibold">{{ dispositivo.get_estado_display }}</p>
+            </div>
+
+            <!-- Campo: Fecha de Fabricación -->
+            <div>
+                <p class="text-sm font-medium text-gray-400">Fecha de Fabricación</p>
+                <p class="text-lg font-semibold">{{ dispositivo.fecha_fabricacion }}</p>
+            </div>
+
+            <!-- Campo: Criticidad Energética -->
+            <div>
+                <p class="text-sm font-medium text-gray-400">Criticidad Energética</p>
+                <p class="text-lg font-semibold">{{ dispositivo.get_criticidad_energetica_display }}</p>
+            </div>
+
+            <!-- Campo: Consumo de Energía -->
+            <div>
+                <p class="text-sm font-medium text-gray-400">Consumo de Energía</p>
+                <p class="text-lg font-semibold">{{ dispositivo.consumo_energia }}</p>
+            </div>
+
+            <!-- Campo: Tipo -->
+            <div>
+                <p class="text-sm font-medium text-gray-400">Tipo</p>
+                <p class="text-lg font-semibold">{{ dispositivo.tipo }}</p>
+            </div>
+        </div>
+
+        <!-- Botón de Volver -->
+        <div class="mt-6">
+            <a href="{% url 'dispositivo:listar' %}" 
+               class="bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-md px-4 py-2 transition block text-center">
+                Volver
+            </a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

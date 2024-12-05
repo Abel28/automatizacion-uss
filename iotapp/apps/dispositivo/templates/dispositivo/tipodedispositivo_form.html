@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Tipo de Dispositivo{% endblock title %}
+
+{% block content %}
+
+<div class="flex flex-col items-center justify-center w-full bg-[#1e2a35] text-white p-6">
+    <!-- Título -->
+    <p class="text-2xl font-bold mb-6">Crear Dispositivo</p>
+
+    <!-- Formulario -->
+    <form method="post" class="bg-[#2d3e50] p-6 rounded-lg shadow-lg w-[30rem]">
+        {% csrf_token %}
+        <div class="flex flex-col space-y-4">
+            <label for="id_descripcion" class="text-sm font-medium mb-1">{{ form.descripcion.label }}</label>
+            {{ form.descripcion }}
+        </div>
+
+        <!-- Botones -->
+        <div class="mt-6 flex justify-between">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md px-4 py-2 transition">
+                Guardar
+            </button>
+            <a href="{% url 'dispositivo:tipo-listar' %}" 
+               class="bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-md px-4 py-2 transition">
+                Volver
+            </a>
+        </div>
+    </form>
+</div>
+
+
+{% endblock content %}

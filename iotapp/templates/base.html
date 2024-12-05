@@ -1,0 +1,62 @@
+{% load livereload_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>IOT APP - {% block title %}{% endblock title %}</title>
+</head>
+
+<body class="h-screen bg-[#1e2a35] overflow-hidden">
+    <!-- Encabezado -->
+    <div class="bg-[#2f606f] flex py-6 px-8 items-center gap-4 shadow-xl">
+        <img src="{% static 'img/6119533.png' %}" alt="IoT Logo" class="w-10 h-10">
+        <h1 class="text-white font-bold text-3xl tracking-wide">IoT App</h1>
+    </div>
+
+    <!-- Contenido Principal -->
+    <div class="flex h-screen">
+        <!-- Barra de Navegación Lateral -->
+        <aside class="w-64 bg-[#2f606f] text-white mt-8 ml-5 h-[80%] rounded-lg shadow-xl flex flex-col">
+            <!-- Título de la barra lateral -->
+            <div class="py-6 border-b border-[#3b4f5f] text-center">
+                <h3 class="text-lg font-semibold">MENU</h3>
+            </div>
+
+            <!-- Enlaces de navegación -->
+            <nav class="flex-grow mt-4">
+                <ul class="flex flex-col space-y-2 px-4">
+                    <li>
+                        <a href="{% url 'dispositivo:listar' %}"
+                            class="block px-3 py-2 rounded-lg hover:bg-[#3b4f5f] transition">
+                            Dispositivos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'dispositivo:tipo-listar' %}"
+                            class="block px-3 py-2 rounded-lg hover:bg-[#3b4f5f] transition">
+                            Tipo de Dispositivo
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="flex-grow mt-8 mr-5 p-6 shadow-xl text-white overflow-auto">
+            {% block content %}
+            <!-- Aquí irá el contenido dinámico -->
+            {% endblock content %}
+        </main>
+    </div>
+</body>
+
+
+
+</html>
+
+{% livereload_script %}

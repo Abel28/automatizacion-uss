@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      DJANGO_SETTINGS_MODULE: iotapp.settings
+    command: sh -c "python iotapp/manage.py livereload & python iotapp/manage.py runserver 0.0.0.0:8000"

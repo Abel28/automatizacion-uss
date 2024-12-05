@@ -1,0 +1,131 @@
+{% extends "base.html" %} 
+{% block title %} Listar Dispositivos {% endblock title %} 
+
+{% block content %}
+
+<div class="flex flex-col w-full h-full bg-[#1e2a35] text-white p-6">
+  <div class="flex gap-4 items-center">
+    <form
+      method="get"
+      action="{% url 'dispositivo:listar' %}"
+      class="flex w-2/3"
+    >
+      <input
+        type="text"
+        name="search"
+        id="search"
+        class="text-gray-700 px-4 py-2 rounded-l-md w-full outline-none border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Buscar..."
+        value="{{ request.GET.search|default_if_none:'' }}"
+      />
+      <button
+        type="submit"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-md transition"
+      >
+        Buscar
+      </button>
+    </form>
+    <a
+      href="{% url 'dispositivo:crear' %}"
+      class="bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-md px-4 py-2 transition w-1/3 text-center"
+    >
+      + Agregar
+    </a>
+  </div>
+  <div class="mt-4">
+    <h1 class="font-bold text-2xl text-white">Dispositivos</h1>
+  </div>
+  <div class="flex mt-5 px-4 py-4 rounded-md shadow-lg text-white bg-[#2d3e50]">
+    <div class="w-full overflow-x-auto">
+      <table class="w-full table-auto border-collapse">
+        <thead class="bg-[#455b85] text-white">
+          <tr>
+            <th class="py-3 px-4 text-left border-b border-[#3b5166]">
+              MAC ADDRESS
+            </th>
+            <th class="py-3 px-4 text-left border-b border-[#3b5166]">
+              Nombre
+            </th>
+            <th class="py-3 px-4 text-left border-b border-[#3b5166]">
+              Estado
+            </th>
+            <th class="py-3 px-4 text-left border-b border-[#3b5166]">
+              Fecha de Fabricación
+            </th>
+            <th class="py-3 px-4 text-left border-b border-[#3b5166]">
+              Criticidad Energética
+            </th>
+            <th class="py-3 px-4 text-left border-b border-[#3b5166]">
+              Consumo de Energía
+            </th>
+            <th class="py-3 px-4 text-left border-b border-[#3b5166]">Tipo</th>
+            <th class="py-3 px-4 text-left border-b border-[#3b5166]">
+              Fecha de Creación
+            </th>
+            <th class="py-3 px-4 text-left border-b border-[#3b5166]">
+              Opciones
+            </th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          {% for dispositivo in dispositivos %}
+          <tr class="hover:bg-[#374c63] transition">
+            <td class="py-3 px-4 border-b border-[#3b5166]">
+              {{ dispositivo.mac_adress }}
+            </td>
+            <td class="py-3 px-4 border-b border-[#3b5166]">
+              {{ dispositivo.nombre }}
+            </td>
+            <td class="py-3 px-4 border-b border-[#3b5166]">
+              {{ dispositivo.get_estado_display }}
+            </td>
+            <td class="py-3 px-4 border-b border-[#3b5166]">
+              {{ dispositivo.fecha_fabricacion }}
+            </td>
+            <td class="py-3 px-4 border-b border-[#3b5166]">
+              {{ dispositivo.get_criticidad_energetica_display }}
+            </td>
+            <td class="py-3 px-4 border-b border-[#3b5166]">
+              {{ dispositivo.consumo_energia }}
+            </td>
+            <td class="py-3 px-4 border-b border-[#3b5166]">
+              {{ dispositivo.tipo }}
+            </td>
+            <td class="py-3 px-4 border-b border-[#3b5166]">
+              {{ dispositivo.fecha_registro }}
+            </td>
+            <td class="py-3 px-4 border-b border-[#3b5166] flex space-x-3">
+              <a
+                href="{% url 'dispositivo:detalle' pk=dispositivo.id %}"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md px-3 py-1 transition"
+              >
+                Ver
+              </a>
+              <a
+                href="{% url 'dispositivo:actualizar' pk=dispositivo.id %}"
+                class="bg-yellow-500 hover:bg-yellow-600 text-white font-medium rounded-md px-3 py-1 transition"
+              >
+                Modificar
+              </a>
+              <a
+                href="{% url 'dispositivo:eliminar' pk=dispositivo.id %}"
+                class="bg-red-600 hover:bg-red-700 text-white font-medium rounded-md px-3 py-1 transition"
+              >
+                Eliminar
+              </a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="9" class="text-center py-3 px-4 text-gray-500">
+              No hay dispositivos disponibles.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

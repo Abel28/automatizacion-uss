@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% if "/crear" in request.path %}
+Crear Dispositivo
+{% elif "/actualizar" in request.path %}
+Actualizar Dispositivo
+{% endif %}
+{% endblock title %}
+
+{% block content %}
+
+<div class="flex flex-col items-center justify-center w-full bg-[#1e2a35] text-white">
+    {% if "/crear" in request.path %}
+    <p class="text-2xl font-bold mb-6">Crear Dispositivo</p>
+    {% elif "/actualizar" in request.path %}
+        <p class="text-2xl font-bold mb-6">Editar Dispositivo</p>
+    {% endif %}
+
+    <form method="post" class="bg-[#2d3e50] py-6 px-10 rounded-lg shadow-lg w-[30rem]">
+        {% csrf_token %}
+        <div class="flex flex-col">
+            <label for="id_mac_adress" class="text-sm font-medium mb-1">{{ form.mac_adress.label }}</label>
+            {{ form.mac_adress }}
+            {% if form.mac_adress.errors %}
+            <p class="text-red-500 text-sm mt-1">{{ form.mac_adress.errors|striptags }}</p>
+            {% endif %}
+
+            <label for="id_nombre" class="text-sm font-medium mb-1 mt-4">{{ form.nombre.label }}</label>
+            {{ form.nombre }}
+            {% if form.nombre.errors %}
+            <p class="text-red-500 text-sm mt-1">{{ form.nombre.errors|striptags }}</p>
+            {% endif %}
+
+            <label for="id_estado" class="text-sm font-medium mb-1 mt-4">{{ form.estado.label }}</label>
+            {{ form.estado }}
+            {% if form.estado.errors %}
+            <p class="text-red-500 text-sm mt-1">{{ form.estado.errors|striptags }}</p>
+            {% endif %}
+
+            <label for="id_fecha_fabricacion" class="text-sm font-medium mb-1 mt-4">{{ form.fecha_fabricacion.label }}</label>
+            {{ form.fecha_fabricacion }}
+            {% if form.fecha_fabricacion.errors %}
+            <p class="text-red-500 text-sm mt-1">{{ form.fecha_fabricacion.errors|striptags }}</p>
+            {% endif %}
+
+            <label for="id_criticidad_energetica" class="text-sm font-medium mb-1 mt-4">{{ form.criticidad_energetica.label }}</label>
+            {{ form.criticidad_energetica }}
+            {% if form.criticidad_energetica.errors %}
+            <p class="text-red-500 text-sm mt-1">{{ form.criticidad_energetica.errors|striptags }}</p>
+            {% endif %}
+
+            <label for="id_consumo_energia" class="text-sm font-medium mb-1 mt-4">{{ form.consumo_energia.label }}</label>
+            {{ form.consumo_energia }}
+            {% if form.consumo_energia.errors %}
+            <p class="text-red-500 text-sm mt-1">{{ form.consumo_energia.errors|striptags }}</p>
+            {% endif %}
+
+            <label for="id_tipo" class="text-sm font-medium mb-1 mt-4">{{ form.tipo.label }}</label>
+            {{ form.tipo }}
+            {% if form.tipo.errors %}
+            <p class="text-red-500 text-sm mt-1">{{ form.tipo.errors|striptags }}</p>
+            {% endif %}
+        </div>
+
+        <div class="mt-6 flex justify-between">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md px-4 py-2 transition">
+                Guardar
+            </button>
+            <a href="{% url 'dispositivo:listar' %}" 
+               class="bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-md px-4 py-2 transition">
+                Volver
+            </a>
+        </div>
+    </form>
+</div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Eliminar Dispositivo{% endblock title %}
+
+{% block content %}
+
+<div class="flex flex-col items-center justify-center w-full bg-[#1e2a35] text-white">
+    <!-- Contenedor de la tarjeta -->
+    <div class="bg-[#2d3e50] rounded-lg shadow-lg w-96 p-6 text-center">
+        <p class="text-lg font-semibold mb-4">Eliminar Tipo</p>
+        <h2 class="text-xl font-bold text-gray-300 mb-6">¿Estás seguro de eliminar el dispositivo?</h2>
+        
+        <!-- Botones de acción -->
+        <form method="post" class="mb-4">
+            {% csrf_token %}
+            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-medium rounded-md px-4 py-2 w-full transition">
+                Confirmar
+            </button>
+        </form>
+        <a href="{% url 'dispositivo:listar' %}" 
+           class="bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-md px-4 py-2 w-full block text-center transition">
+            Volver
+        </a>
+    </div>
+</div>
+
+
+{% endblock content %}
